@@ -1,65 +1,88 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const projects = [
+  "Bitcoin education in communities or public schools",
+  "Development of Bitcoin tools or wallets",
+  "Bitcoin-only farmers markets and circular economies",
+  "Workshops, campaigns, and educational initiatives",
+  "Any project that creates real Bitcoin adoption and impact",
+];
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="mx-auto max-w-6xl px-6 py-20">
+      <div className="max-w-3xl mb-hero-frame">
+        <p className="text-xs uppercase tracking-[0.25em] text-mb-cream/70">
+          More than a beauty pageant. A global movement.
+        </p>
+
+        <p className="mt-6 text-lg text-mb-cream/85">
+          Miss Bitcoin is an international competition that celebrates beauty, intelligence,
+          and impact. Unlike traditional pageants, Miss Bitcoin is not about looks alone—it is
+          about action, leadership, and real change.
+        </p>
+
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Link
+            href="/get-involved"
+            className="rounded-full bg-mb-cream px-6 py-3 text-center text-sm font-medium text-mb-dark hover:bg-mb-cream/95"
+          >
+            Join the movement
+          </Link>
+
+          <Link
+            href="/program"
+            className="rounded-full border border-mb-gold/40 px-6 py-3 text-center text-sm font-medium text-mb-cream hover:border-mb-gold"
+          >
+            How it works
+          </Link>
+        </div>
+
+        <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-mb-gold/70 to-transparent" />
+
+        <div className="mt-14 rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-8">
+          <h2 className="text-xl font-semibold">Each representative builds real Bitcoin adoption</h2>
+
+          <p className="mt-3 text-mb-cream/85">
+            Each woman representing her country must create and execute a Bitcoin-based project designed
+            to educate, empower, and drive adoption within her community.
+          </p>
+
+          <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+            {projects.map((p) => (
+              <li
+                key={p}
+                className="rounded-xl border border-mb-gold/10 bg-mb-dark/60 px-4 py-3 text-sm text-mb-cream/85"
+              >
+                {p}
+              </li>
+            ))}
+          </ul>
+
+          <p className="mt-6 text-mb-cream/85">
+            At the end of each cycle, the project with the greatest real-world impact is awarded{" "}
+            <span className="font-semibold text-mb-cream">1 Bitcoin</span>, funded by the Miss Bitcoin organization,
+            to expand and scale the initiative—locally and globally.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-6">
+            <div className="text-sm text-mb-cream/70">Contestants</div>
+            <div className="mt-2 font-semibold">Apply & build your project</div>
+          </div>
+
+          <div className="rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-6">
+            <div className="text-sm text-mb-cream/70">Sponsors</div>
+            <div className="mt-2 font-semibold">Support global impact</div>
+          </div>
+
+          <div className="rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-6">
+            <div className="text-sm text-mb-cream/70">Investors</div>
+            <div className="mt-2 font-semibold">Back the platform</div>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
