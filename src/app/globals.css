@@ -1,26 +1,59 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global base */
+html,
+body {
+  height: 100%;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Brand colors */
+  --color-mb-dark: #2d2d2d;
+  --color-mb-cream: #faf9ef;
+  --color-mb-gold: #b89c6a;
+  --color-mb-bronze: #97784c;
+  --color-mb-accent: #e98402;
+  --color-mb-softGold: #eddca4;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Site defaults */
+  --color-background: var(--color-mb-dark);
+  --color-foreground: var(--color-mb-cream);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-background);
+  color: var(--color-foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Utilities */
+@layer utilities {
+  /* Subtle hero: NO cloud, just faint gold line-work */
+  .mb-hero-frame {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .mb-hero-frame::after {
+    content: "";
+    position: absolute;
+    inset: -60px -40px -20px -40px;
+
+    background-image: repeating-linear-gradient(
+      100deg,
+      rgba(184, 156, 106, 0.10) 0px,
+      rgba(184, 156, 106, 0.10) 1px,
+      transparent 1px,
+      transparent 26px
+    );
+
+    -webkit-mask-image: radial-gradient(75% 60% at 55% 35%, rgba(0, 0, 0, 0.85), transparent 72%);
+    mask-image: radial-gradient(75% 60% at 55% 35%, rgba(0, 0, 0, 0.85), transparent 72%);
+
+    opacity: 0.30;
+    pointer-events: none;
+    z-index: -1;
+  }
 }
