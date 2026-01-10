@@ -27,11 +27,12 @@ export default function RootLayout({ children }) {
             <nav className="hidden gap-6 text-sm text-mb-cream/70 md:flex">
               <Link className="hover:text-mb-cream" href="/about">About</Link>
               <Link className="hover:text-mb-cream" href="/program">Program</Link>
-              <Link className="hover:text-mb-cream" href="/get-involved">Get Involved</Link>
+              <Link className="hover:text-mb-cream" href="/faq">FAQ</Link>
+              <Link className="hover:text-mb-cream" href="/contact">Contact</Link>
             </nav>
 
             <Link
-              href="/get-involved"
+              href="/apply"
               className="rounded-full border border-mb-gold/40 px-4 py-2 text-sm text-mb-cream hover:border-mb-gold"
             >
               Join
