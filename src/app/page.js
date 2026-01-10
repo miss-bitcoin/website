@@ -24,7 +24,7 @@ export default function Home() {
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Link
-            href="/get-involved"
+            href="/apply"
             className="rounded-full bg-mb-cream px-6 py-3 text-center text-sm font-medium text-mb-dark hover:bg-mb-cream/95"
           >
             Join the movement
