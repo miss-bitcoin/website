@@ -14,6 +14,10 @@ const faqs = [
     a: "Women who want to represent their country and are ready to design and execute a Bitcoin-based project in their community.",
   },
   {
+    q: "Do I need to know about Bitcoin to apply?",
+    a: "No. You don’t need to be a Bitcoin expert to apply. What matters most is your curiosity, values, and willingness to learn. If selected, you’ll receive education, mentorship, and guidance to help you understand Bitcoin and how it can create real-world impact in your community.",
+  },
+  {
     q: "What kinds of projects qualify?",
     a: "Education initiatives, circular economy pilots, Bitcoin community programs, tools and wallets, workshops, and any initiative that measurably increases real adoption.",
   },

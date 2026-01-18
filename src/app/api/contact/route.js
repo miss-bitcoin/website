@@ -11,7 +11,7 @@ export async function POST(req) {
   try {
     const token = process.env.AIRTABLE_TOKEN;
     const baseId = process.env.AIRTABLE_BASE_ID;
-    const tableName = process.env.AIRTABLE_TABLE_NAME;
+    const tableName = process.env.AIRTABLE_CONTACT_TABLE;
 
     if (!token || !baseId || !tableName) {
       return json(500, { error: "Server is missing Airtable env vars." });

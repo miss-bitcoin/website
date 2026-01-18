@@ -1,70 +1,258 @@
-import Link from "next/link";
+"use client";
 
-const APPLY_URL = process.env.NEXT_PUBLIC_TYPEFORM_APPLY_URL;
+import { useState } from "react";
 
 export default function ApplyPage() {
+  const [status, setStatus] = useState({ state: "idle", message: "" });
+
+  async function onSubmit(e) {
+    e.preventDefault();
+    const formEl = e.currentTarget;
+
+    setStatus({ state: "loading", message: "" });
+
+    const form = new FormData(formEl);
+
+    try {
+      const res = await fetch("/api/apply", {
+        method: "POST",
+        body: form, // IMPORTANT: send FormData (no Content-Type header)
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || "Something went wrong.");
+      if (formEl && typeof formEl.reset === "function") formEl.reset();
+
+      setStatus({ state: "success", message: "Application submitted! We’ll be in touch." });
+    } catch (err) {
+      setStatus({
+        state: "error",
+        message: err?.message || "Failed to submit.",
+      });
+    }
+  }
+
   return (
-    <main className="mx-auto max-w-6xl px-6 py-16">
-      <h1 className="text-4xl font-bold">Apply to Miss Bitcoin</h1>
-      <p className="mt-4 max-w-3xl text-mb-cream/75">
-        Miss Bitcoin is for women who want to build real Bitcoin adoption in their communities.
-        If you’re ready to lead with purpose and execute a real-world project, we’d love to hear from you.
+    <main className="mx-auto max-w-3xl px-6 py-16">
+      <h1 className="text-4xl font-bold">Apply to be the next Miss Bitcoin</h1>
+      <p className="mt-4 text-mb-cream/75">
+        There are no right or wrong answers — we value honesty, vision, and impact.
       </p>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
-        <section className="rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-8">
-          <h2 className="text-xl font-semibold">What you’ll do</h2>
-          <ul className="mt-4 grid gap-3 text-mb-cream/80">
-            <li>• Represent your country</li>
-            <li>• Build and execute a Bitcoin-focused project</li>
-            <li>• Share impact and progress publicly</li>
-            <li>• Compete for the annual 1 BTC award</li>
-          </ul>
+      <form onSubmit={onSubmit} className="mt-10 space-y-8">
+        {/* Honeypot */}
+        <input name="company" tabIndex={-1} autoComplete="off" className="hidden"/>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            {APPLY_URL ? (
-              <a
-                href={APPLY_URL}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded-full bg-mb-cream px-6 py-3 text-center text-sm font-medium text-mb-dark hover:bg-mb-cream/95"
-              >
-                Open application form
-              </a>
-            ) : (
-              <div className="rounded-xl border border-mb-gold/20 bg-black/10 p-4 text-sm text-mb-cream/70">
-                Set <code className="text-mb-cream">NEXT_PUBLIC_TYPEFORM_APPLY_URL</code> in <code>.env.local</code>
-              </div>
-            )}
+        <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
+          <h2 className="text-xl font-semibold">Personal Information</h2>
 
-            <Link
-              href="/faq"
-              className="rounded-full border border-mb-gold/40 px-6 py-3 text-center text-sm font-medium text-mb-cream hover:border-mb-gold"
-            >
-              Read the FAQ
-            </Link>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="text-sm text-mb-cream/70">First Name *</label>
+              <input
+                  name="firstName"
+                  required
+                  placeholder="First name"
+                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              />
+            </div>
+            <div>
+              <label className="text-sm text-mb-cream/70">Last Name *</label>
+              <input
+                  name="lastName"
+                  required
+                  placeholder="Last name"
+                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="text-sm text-mb-cream/70">Nationality *</label>
+              <input
+                  name="nationality"
+                  required
+                  placeholder="Nationality"
+                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              />
+            </div>
+            <div>
+              <label className="text-sm text-mb-cream/70">Age *</label>
+              <input
+                  name="age"
+                  type="number"
+                  min="1"
+                  step="1"
+                  required
+                  placeholder="Age"
+                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              />
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <label className="text-sm text-mb-cream/70">Country of Residence *</label>
+            <input
+                name="countryResidence"
+                required
+                placeholder="Country of residence"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="text-sm text-mb-cream/70">Email *</label>
+            <input
+                name="email"
+                type="email"
+                required
+                placeholder="you@email.com"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="text-sm text-mb-cream/70">Highest Level of Education Completed *</label>
+            <input
+                name="education"
+                required
+                placeholder="e.g., High school, Bachelor’s, Master’s..."
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="text-sm text-mb-cream/70">Field of Study / Academic Background *</label>
+            <input
+                name="fieldOfStudy"
+                required
+                placeholder="Your academic background"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="text-sm text-mb-cream/70">Current Profession or Occupation *</label>
+            <input
+                name="profession"
+                required
+                placeholder="Your current profession"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
           </div>
         </section>
 
-        <section className="rounded-2xl border border-mb-cream/10 bg-black/10 p-8">
-          <h2 className="text-xl font-semibold">Prefer to apply here?</h2>
-          <p className="mt-4 text-mb-cream/75">
-            You can embed the Typeform directly on this page once your form is finalized.
-            For now, we’ll route people to the official application link.
+        <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
+          <h2 className="text-xl font-semibold">Photo Submission</h2>
+          <p className="mt-2 text-sm text-mb-cream/70">
+            Please upload a full-body photo and a front face photo.
           </p>
 
-          {APPLY_URL && (
-            <div className="mt-6 overflow-hidden rounded-2xl border border-mb-cream/10">
-              <iframe
-                title="Miss Bitcoin Application"
-                src={APPLY_URL}
-                className="h-[640px] w-full"
-                allow="camera; microphone; autoplay; encrypted-media;"
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="text-sm text-mb-cream/70">Full-body photo *</label>
+              <input
+                  name="fullBodyPhoto"
+                  type="file"
+                  accept="image/*"
+                  required
+                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
-          )}
+
+            <div>
+              <label className="text-sm text-mb-cream/70">Front face photo *</label>
+              <input
+                  name="facePhoto"
+                  type="file"
+                  accept="image/*"
+                  required
+                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              />
+            </div>
+          </div>
         </section>
-      </div>
+
+        <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
+          <h2 className="text-xl font-semibold">Video Submission</h2>
+          <p className="mt-2 text-sm text-mb-cream/70">
+            Please upload a short video answering: “Why do you want to become the next Miss Bitcoin?”
+          </p>
+
+          <div className="mt-5">
+            <label className="text-sm text-mb-cream/70">Intro video *</label>
+            <input
+                name="introVideo"
+                type="file"
+                accept="video/*"
+                required
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
+            <p className="mt-2 text-xs text-mb-cream/60">
+              If your video fails to upload due to size, please contact us with a Drive or YouTube link.
+            </p>
+          </div>
+        </section>
+
+        <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
+          <h2 className="text-xl font-semibold">Bitcoin Questionnaire</h2>
+          <p className="mt-1 text-sm text-mb-cream/60">
+            (If you are not into Bitcoin or don&apos;t know how to answer, just answer the best way you can.)
+          </p>
+
+          {[
+            "What does Bitcoin mean to you?",
+            "When did you first learn about Bitcoin?",
+            "Tell us your story: how did you get involved with Bitcoin?",
+            "If you were selected as the representative of your country, what would you do to help Bitcoin adoption locally?",
+            "If you had access to an unlimited amount of Bitcoin, what would you do with it?",
+            "What problem in your country do you believe Bitcoin can help solve?",
+            "How would you educate young people about Bitcoin?",
+            "Have you participated in any social, educational, or community projects before? If yes, please describe.",
+            "What makes you different from other candidates?",
+            "What values do you believe a Miss Bitcoin representative should embody?",
+          ].map((label, idx) => {
+            const n = idx + 1;
+            return (
+                <div className="mt-5" key={n}>
+                  <label className="text-sm text-mb-cream/70">
+                    {n}. {label} *
+                  </label>
+                  <textarea
+                      name={`q${n}`}
+                      rows={4}
+                      required
+                      className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                  />
+                </div>
+            );
+          })}
+        </section>
+
+        <button
+            type="submit"
+            disabled={status.state === "loading"}
+            className="rounded-full bg-mb-cream px-6 py-3 text-sm font-medium text-mb-dark hover:bg-mb-cream/95 disabled:opacity-60"
+        >
+          {status.state === "loading" ? "Uploading files (may take a minute)..." : "Submit application"}
+        </button>
+
+        {status.state !== "idle" && (
+            <p
+                className={
+                    "text-sm " +
+                    (status.state === "success"
+                        ? "text-mb-cream/80"
+                        : status.state === "error"
+                            ? "text-red-300"
+                            : "text-mb-cream/70")
+                }
+            >
+              {status.message}
+            </p>
+        )}
+      </form>
     </main>
   );
 }
