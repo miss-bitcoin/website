@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: "/banner",
-        destination: "/apply",
+        destination: "/",
         permanent: false, // allows us to change later
       },
     ];
