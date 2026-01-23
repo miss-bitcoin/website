@@ -4,8 +4,8 @@ const nextConfig = {
     return [
       {
         source: "/banner",
-        destination: "/",
-        permanent: false, // allows us to change later
+        destination: "https://miss-bitcoin.com/",
+        permanent: true,
       },
     ];
   },
