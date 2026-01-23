@@ -6,9 +6,11 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const NAV = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/program", label: "Program" },
   { href: "/apply", label: "Apply" },
+  { href: "/donate", label: "Donate" },
   { href: "/founder", label: "Founder" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
@@ -38,13 +40,13 @@ export default function SiteHeader() {
         {/* Logo */}
         <Link href="/" className="flex items-center opacity-95 hover:opacity-100 transition">
           <Image
-            src="/logo-miss-bitcoin-cropped.png"
-            alt="Miss Bitcoin"
-            width={260}
-            height={70}
-            priority
-            className="h-14 w-auto sm:h-16"
-          />
+          src="/logo-miss-bitcoin-cropped-trimmed.png"
+          alt="Miss Bitcoin"
+          width={1650}
+          height={400}
+          priority
+          className="h-14 w-auto sm:h-16 block"
+         />
         </Link>
 
         {/* Desktop nav */}
