@@ -41,7 +41,7 @@ export default function Home() {
         <div className="mt-12 h-px w-full bg-gradient-to-r from-transparent via-mb-gold/70 to-transparent" />
 
         <div className="mt-14 rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-8">
-          <h2 className="text-xl font-semibold">Each representative builds real Bitcoin adoption</h2>
+          <h2 className="text-xl font-semibold">Each representative builds a real-world Bitcoin project</h2>
 
           <p className="mt-3 text-mb-cream/85">
             Each woman representing her country must create and execute a Bitcoin-based project designed
