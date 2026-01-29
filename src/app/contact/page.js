@@ -45,28 +45,6 @@ export default function ContactPage() {
             Investors, sponsors, press, or partners — send us a note and we’ll reply soon.
           </p>
 
-          <div className="mt-8 rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
-            <h2 className="text-lg font-semibold">What to expect</h2>
-            <ul className="mt-4 space-y-3 text-sm text-mb-cream/75">
-              <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
-                <span>Typical response time: 24–72 hours.</span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
-                <span>
-                  For conferences: include your event name + the best way to reach you quickly.
-                </span>
-              </li>
-              <li className="flex gap-3">
-                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
-                <span>
-                  If you’re not sure which category fits, choose <span className="font-semibold text-mb-cream">Other</span>.
-                </span>
-              </li>
-            </ul>
-          </div>
-
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {[
               { title: "Sponsors", desc: "Partner with Miss Bitcoin to expand global education." },
@@ -192,13 +170,6 @@ export default function ContactPage() {
               </p>
             )}
 
-            <p className="pt-2 text-xs text-mb-cream/50">
-              Or email us directly at{" "}
-              <a className="text-mb-cream/70 hover:text-mb-cream" href="mailto:contact@miss-bitcoin.com">
-                contact@miss-bitcoin.com
-              </a>
-              .
-            </p>
           </form>
         </section>
       </div>

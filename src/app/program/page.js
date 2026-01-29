@@ -11,12 +11,6 @@ export default function ProgramPage() {
       </p>
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <Link
-          href="/apply"
-          className="inline-flex items-center justify-center rounded-full bg-mb-cream px-6 py-3 text-sm font-medium text-mb-dark hover:bg-mb-cream/95"
-        >
-          Apply to represent your country
-        </Link>
         <Link className="text-sm text-mb-cream/80 hover:text-mb-cream" href="/faq">
           Questions? Read the FAQ →
         </Link>
@@ -96,12 +90,9 @@ export default function ProgramPage() {
             </p>
           </div>
 
-          <div className="mt-7">
-            <Link
-              href="/apply"
-              className="inline-flex w-full items-center justify-center rounded-full bg-mb-cream px-6 py-3 text-sm font-medium text-mb-dark hover:bg-mb-cream/95 sm:w-auto"
-            >
-              Apply now
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <Link className="text-sm text-mb-cream/80 hover:text-mb-cream" href="/faq">
+              Read the FAQ →
             </Link>
           </div>
         </section>

@@ -8,9 +8,6 @@ export default function HomePage() {
       <section className="border-b border-mb-gold/20">
         <div className="mx-auto max-w-6xl px-6 py-16 md:py-20">
           <div className="max-w-3xl">
-            <p className="inline-flex items-center rounded-full border border-mb-gold/25 bg-mb-dark/60 px-3 py-1 text-xs text-mb-cream/70">
-              Applications open • Global program • Impact-led
-            </p>
 
             <h1 className="mt-5 text-4xl font-bold leading-tight md:text-5xl">
               Miss Bitcoin
@@ -194,15 +191,6 @@ export default function HomePage() {
                     help you shape your story.
                   </p>
                 </div>
-              </div>
-
-              <div className="mt-8">
-                <Link
-                  href="/apply"
-                  className="inline-flex w-full items-center justify-center rounded-full bg-mb-cream px-6 py-3 text-sm font-medium text-mb-dark hover:bg-mb-cream/95 sm:w-auto"
-                >
-                  Apply now
-                </Link>
               </div>
             </div>
           </div>

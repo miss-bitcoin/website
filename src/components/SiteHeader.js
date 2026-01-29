@@ -10,6 +10,7 @@ const NAV = [
   { href: "/about", label: "About" },
   { href: "/program", label: "Program" },
   { href: "/apply", label: "Apply" },
+  { href: "/sponsor", label: "Sponsor" },
   { href: "/donate", label: "Donate" },
   { href: "/founder", label: "Founder" },
   { href: "/faq", label: "FAQ" },

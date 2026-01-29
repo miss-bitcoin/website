@@ -35,10 +35,6 @@ export default function FAQPage() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-16">
       <h1 className="text-4xl font-bold">FAQ</h1>
-      <p className="mt-4 max-w-3xl text-mb-cream/75">
-        The program is launching in phases. Here are the most common questions we’re getting right now.
-      </p>
-
       <div className="mt-10 grid gap-4">
         {faqs.map((item) => (
           <details
