@@ -111,9 +111,9 @@ export async function POST(req) {
       "Current Profession or Occupation": profession,
 
       // Keep these as Airtable Attachment fields (URLs only)
-      "Full-body photo": [{ url: fullBodyPhotoLink }],
-      "Front face photo": [{ url: facePhotoLink }],
-      "Intro video": [{ url: introVideoLink }],
+      "Full-body photo": fullBodyPhotoLink,
+      "Front face photo": facePhotoLink,
+      "Intro video": introVideoLink,
 
       Status: "New",
       Source: "Website",
