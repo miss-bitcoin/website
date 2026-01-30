@@ -1,7 +1,5 @@
 export const runtime = "nodejs";
 
-import { put } from "@vercel/blob";
-
 function json(status, data) {
   return new Response(JSON.stringify(data), {
     status,
@@ -21,6 +19,20 @@ function requireEnv(name) {
 
 function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+// Let users paste without https:// and we’ll fix it.
+function normalizeUrl(raw) {
+  const s = clean(raw);
+  if (!s) return "";
+  if (/^https?:\/\//i.test(s)) return s;
+  return `https://${s}`;
+}
+
+// Basic sanity check (not perfect, but enough)
+function isProbablyUrl(s) {
+  // accepts https://..., http://..., or something with a dot like drive.google.com/...
+  return /^https?:\/\//i.test(s) || /\.[a-z]{2,}/i.test(s);
 }
 
 export async function POST(req) {
@@ -70,56 +82,20 @@ export async function POST(req) {
       if (!q(i)) return json(400, { error: `Please answer question ${i}.` });
     }
 
-    // Files
-    const fullBody = form.get("fullBodyPhoto");
-    const facePhoto = form.get("facePhoto");
-    const introVideo = form.get("introVideo");
+    // Links (instead of files)
+    const fullBodyPhotoLink = normalizeUrl(form.get("fullBodyPhotoLink"));
+    const facePhotoLink = normalizeUrl(form.get("facePhotoLink"));
+    const introVideoLink = normalizeUrl(form.get("introVideoLink"));
 
-    if (!(fullBody instanceof File) || fullBody.size === 0) {
-      return json(400, { error: "Full-body photo is required." });
-    }
-    if (!(facePhoto instanceof File) || facePhoto.size === 0) {
-      return json(400, { error: "Front face photo is required." });
-    }
-    if (!(introVideo instanceof File) || introVideo.size === 0) {
-      return json(400, { error: "Intro video is required." });
-    }
+    if (!fullBodyPhotoLink) return json(400, { error: "Full-body photo link is required." });
+    if (!facePhotoLink) return json(400, { error: "Front face photo link is required." });
+    if (!introVideoLink) return json(400, { error: "Intro video link is required." });
 
-    // File size limits (tweak as you want)
-    const MAX_IMAGE_MB = 15;
-    const MAX_VIDEO_MB = 250;
-    const tooBig = (file, maxMb) => file.size > maxMb * 1024 * 1024;
+    if (!isProbablyUrl(fullBodyPhotoLink)) return json(400, { error: "Please enter a valid full-body photo link." });
+    if (!isProbablyUrl(facePhotoLink)) return json(400, { error: "Please enter a valid front face photo link." });
+    if (!isProbablyUrl(introVideoLink)) return json(400, { error: "Please enter a valid intro video link." });
 
-    if (tooBig(fullBody, MAX_IMAGE_MB)) {
-      return json(400, { error: `Full-body photo is too large (max ${MAX_IMAGE_MB}MB).` });
-    }
-    if (tooBig(facePhoto, MAX_IMAGE_MB)) {
-      return json(400, { error: `Front face photo is too large (max ${MAX_IMAGE_MB}MB).` });
-    }
-    if (tooBig(introVideo, MAX_VIDEO_MB)) {
-      return json(400, { error: `Intro video is too large (max ${MAX_VIDEO_MB}MB).` });
-    }
-
-    // Upload to Vercel Blob
-    const safeKey = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    const basePath = `miss-bitcoin/applications/${safeKey}`;
-
-    const [fullBodyUp, faceUp, videoUp] = await Promise.all([
-      put(`${basePath}/full-body-${fullBody.name}`, fullBody, {
-        access: "public",
-        contentType: fullBody.type || "application/octet-stream",
-      }),
-      put(`${basePath}/face-${facePhoto.name}`, facePhoto, {
-        access: "public",
-        contentType: facePhoto.type || "application/octet-stream",
-      }),
-      put(`${basePath}/video-${introVideo.name}`, introVideo, {
-        access: "public",
-        contentType: introVideo.type || "application/octet-stream",
-      }),
-    ]);
-
-    // Airtable write (attachments must be URLs)
+    // Airtable write
     const url = `https://api.airtable.com/v0/${baseId}/${encodeURIComponent(tableName)}`;
 
     const fields = {
@@ -134,9 +110,10 @@ export async function POST(req) {
       "Field of Study / Academic Background": fieldOfStudy,
       "Current Profession or Occupation": profession,
 
-      "Full-body photo": [{ url: fullBodyUp.url }],
-      "Front face photo": [{ url: faceUp.url }],
-      "Intro video": [{ url: videoUp.url }],
+      // Keep these as Airtable Attachment fields (URLs only)
+      "Full-body photo": [{ url: fullBodyPhotoLink }],
+      "Front face photo": [{ url: facePhotoLink }],
+      "Intro video": [{ url: introVideoLink }],
 
       Status: "New",
       Source: "Website",

@@ -2,6 +2,14 @@
 
 import { useState } from "react";
 
+function normalizeUrl(raw) {
+  const s = String(raw || "").trim();
+  if (!s) return "";
+  // If user pastes drive/youtube without protocol, make it clickable
+  if (/^https?:\/\//i.test(s)) return s;
+  return `https://${s}`;
+}
+
 export default function ApplyPage() {
   const [status, setStatus] = useState({ state: "idle", message: "" });
 
@@ -13,20 +21,23 @@ export default function ApplyPage() {
 
     const form = new FormData(formEl);
 
+    // Normalize URLs so users don't have to type https://
+    for (const key of ["fullBodyPhotoLink", "facePhotoLink", "introVideoLink"]) {
+      const v = form.get(key);
+      form.set(key, normalizeUrl(v));
+    }
+
     try {
       const res = await fetch("/api/apply", {
         method: "POST",
-        body: form, // FormData is fine now because we're not sending huge files
+        body: form,
       });
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error || "Something went wrong.");
       if (formEl && typeof formEl.reset === "function") formEl.reset();
 
-      setStatus({
-        state: "success",
-        message: "Application submitted! We’ll be in touch.",
-      });
+      setStatus({ state: "success", message: "Application submitted! We’ll be in touch." });
     } catch (err) {
       setStatus({
         state: "error",
@@ -146,17 +157,15 @@ export default function ApplyPage() {
           </div>
         </section>
 
+        {/* Photo links */}
         <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
           <h2 className="text-xl font-semibold">Photo Submission</h2>
           <p className="mt-2 text-sm text-mb-cream/70">
             Please share links (not uploads). We recommend Google Drive, Dropbox, iCloud, or OneDrive.
           </p>
 
-          <div className="mt-4 rounded-2xl border border-mb-gold/15 bg-black/10 p-4">
-            <p className="text-xs text-mb-cream/65">
-              Tip: If using Google Drive, set access to{" "}
-              <span className="text-mb-cream/85">“Anyone with the link can view”</span>.
-            </p>
+          <div className="mt-4 rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-4 text-xs text-mb-cream/60">
+            Tip: If using Google Drive, set access to <span className="text-mb-cream/80">“Anyone with the link can view”</span>.
           </div>
 
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -164,9 +173,8 @@ export default function ApplyPage() {
               <label className="text-sm text-mb-cream/70">Full-body photo link *</label>
               <input
                 name="fullBodyPhotoLink"
-                type="url"
                 required
-                placeholder="https://drive.google.com/..."
+                placeholder="drive.google.com/..."
                 className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
@@ -175,12 +183,33 @@ export default function ApplyPage() {
               <label className="text-sm text-mb-cream/70">Front face photo link *</label>
               <input
                 name="facePhotoLink"
-                type="url"
                 required
-                placeholder="https://drive.google.com/..."
+                placeholder="drive.google.com/..."
                 className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
+          </div>
+        </section>
+
+        {/* Video link */}
+        <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
+          <h2 className="text-xl font-semibold">Video Submission</h2>
+          <p className="mt-2 text-sm text-mb-cream/70">
+            Please share a link to a short video answering: “Why do you want to become the next Miss Bitcoin?”
+          </p>
+
+          <div className="mt-4 rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-4 text-xs text-mb-cream/60">
+            You can use YouTube (unlisted), Google Drive, Dropbox, Loom, or any platform where we can view the video.
+          </div>
+
+          <div className="mt-5">
+            <label className="text-sm text-mb-cream/70">Intro video link *</label>
+            <input
+              name="introVideoLink"
+              required
+              placeholder="youtube.com/... or drive.google.com/..."
+              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
           </div>
         </section>
 
