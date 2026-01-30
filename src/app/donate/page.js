@@ -144,30 +144,29 @@ export default function DonatePage() {
         <section className="rounded-2xl border border-mb-cream/10 bg-mb-dark/60 p-8">
           <div className="text-xs uppercase tracking-widest text-mb-cream/60">Option 2</div>
           <h2 className="mt-3 text-xl font-semibold">Donate with card (Stripe)</h2>
-          <p className="mt-3 text-mb-cream/75">
-            Credit/debit card or supported wallet options (Apple Pay / Google Pay depending on device).
-          </p>
 
           <div className="mt-6 rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-5">
             <p className="text-sm text-mb-cream/70">
-              <span className="font-semibold text-mb-cream/85">Placeholder:</span>{" "}
-              Replace the Stripe link in this page when you’re ready.
+              <span className="font-semibold text-mb-cream/85">Fiat donations coming soon.</span>{" "}
+              We’re setting up Stripe for credit/debit and wallet payments.
             </p>
           </div>
 
           <div className="mt-6">
-            <a
-              href={STRIPE_LINK}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex w-full items-center justify-center rounded-xl bg-mb-cream px-4 py-3 text-sm font-medium text-mb-dark hover:bg-mb-cream/95"
+            <button
+                type="button"
+                disabled
+                className="inline-flex w-full items-center justify-center rounded-xl bg-mb-cream/30 px-4 py-3 text-sm font-medium text-mb-dark/70 cursor-not-allowed"
             >
-              Donate via Stripe
-            </a>
-            <p className="mt-2 text-xs text-mb-cream/55">Opens Stripe in a new tab.</p>
+              Card donations coming soon
+            </button>
+            <p className="mt-2 text-xs text-mb-cream/55">
+              Prefer to donate now? Use Bitcoin or Lightning (left).
+            </p>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-mb-gold/15 bg-mb-dark/50 p-5 shadow-[0_0_0_1px_rgba(212,175,55,0.10)]">
+          <div
+              className="mt-6 rounded-2xl border border-mb-gold/15 bg-mb-dark/50 p-5 shadow-[0_0_0_1px_rgba(212,175,55,0.10)]">
             <h3 className="text-sm font-semibold text-mb-cream/90">Want to sponsor instead?</h3>
             <p className="mt-2 text-sm text-mb-cream/70">
               Check the{" "}
