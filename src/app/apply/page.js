@@ -214,30 +214,6 @@ export default function ApplyPage() {
         </section>
 
         <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
-          <h2 className="text-xl font-semibold">Video Submission</h2>
-          <p className="mt-2 text-sm text-mb-cream/70">
-            Please share a link to a short video answering: “Why do you want to become the next Miss Bitcoin?”
-          </p>
-
-          <div className="mt-4 rounded-2xl border border-mb-gold/15 bg-black/10 p-4">
-            <p className="text-xs text-mb-cream/65">
-              You can use YouTube (unlisted), Google Drive, Dropbox, Loom, or any platform where we can view the video.
-            </p>
-          </div>
-
-          <div className="mt-5">
-            <label className="text-sm text-mb-cream/70">Intro video link *</label>
-            <input
-              name="introVideoLink"
-              type="url"
-              required
-              placeholder="https://youtube.com/... or https://drive.google.com/..."
-              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
-            />
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
           <h2 className="text-xl font-semibold">Bitcoin Questionnaire</h2>
           <p className="mt-1 text-sm text-mb-cream/60">
             (If you are not into Bitcoin or don&apos;t know how to answer, just answer the best way you can.)
