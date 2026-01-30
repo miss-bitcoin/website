@@ -16,14 +16,17 @@ export default function ApplyPage() {
     try {
       const res = await fetch("/api/apply", {
         method: "POST",
-        body: form, // IMPORTANT: send FormData (no Content-Type header)
+        body: form, // FormData is fine now because we're not sending huge files
       });
 
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data?.error || "Something went wrong.");
       if (formEl && typeof formEl.reset === "function") formEl.reset();
 
-      setStatus({ state: "success", message: "Application submitted! We’ll be in touch." });
+      setStatus({
+        state: "success",
+        message: "Application submitted! We’ll be in touch.",
+      });
     } catch (err) {
       setStatus({
         state: "error",
@@ -41,7 +44,7 @@ export default function ApplyPage() {
 
       <form onSubmit={onSubmit} className="mt-10 space-y-8">
         {/* Honeypot */}
-        <input name="company" tabIndex={-1} autoComplete="off" className="hidden"/>
+        <input name="company" tabIndex={-1} autoComplete="off" className="hidden" />
 
         <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
           <h2 className="text-xl font-semibold">Personal Information</h2>
@@ -50,19 +53,19 @@ export default function ApplyPage() {
             <div>
               <label className="text-sm text-mb-cream/70">First Name *</label>
               <input
-                  name="firstName"
-                  required
-                  placeholder="First name"
-                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                name="firstName"
+                required
+                placeholder="First name"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
             <div>
               <label className="text-sm text-mb-cream/70">Last Name *</label>
               <input
-                  name="lastName"
-                  required
-                  placeholder="Last name"
-                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                name="lastName"
+                required
+                placeholder="Last name"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
           </div>
@@ -71,22 +74,22 @@ export default function ApplyPage() {
             <div>
               <label className="text-sm text-mb-cream/70">Nationality *</label>
               <input
-                  name="nationality"
-                  required
-                  placeholder="Nationality"
-                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                name="nationality"
+                required
+                placeholder="Nationality"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
             <div>
               <label className="text-sm text-mb-cream/70">Age *</label>
               <input
-                  name="age"
-                  type="number"
-                  min="1"
-                  step="1"
-                  required
-                  placeholder="Age"
-                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                name="age"
+                type="number"
+                min="1"
+                step="1"
+                required
+                placeholder="Age"
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
           </div>
@@ -94,51 +97,51 @@ export default function ApplyPage() {
           <div className="mt-4">
             <label className="text-sm text-mb-cream/70">Country of Residence *</label>
             <input
-                name="countryResidence"
-                required
-                placeholder="Country of residence"
-                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              name="countryResidence"
+              required
+              placeholder="Country of residence"
+              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
             />
           </div>
 
           <div className="mt-4">
             <label className="text-sm text-mb-cream/70">Email *</label>
             <input
-                name="email"
-                type="email"
-                required
-                placeholder="you@email.com"
-                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              name="email"
+              type="email"
+              required
+              placeholder="you@email.com"
+              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
             />
           </div>
 
           <div className="mt-4">
             <label className="text-sm text-mb-cream/70">Highest Level of Education Completed *</label>
             <input
-                name="education"
-                required
-                placeholder="e.g., High school, Bachelor’s, Master’s..."
-                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              name="education"
+              required
+              placeholder="e.g., High school, Bachelor’s, Master’s..."
+              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
             />
           </div>
 
           <div className="mt-4">
             <label className="text-sm text-mb-cream/70">Field of Study / Academic Background *</label>
             <input
-                name="fieldOfStudy"
-                required
-                placeholder="Your academic background"
-                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              name="fieldOfStudy"
+              required
+              placeholder="Your academic background"
+              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
             />
           </div>
 
           <div className="mt-4">
             <label className="text-sm text-mb-cream/70">Current Profession or Occupation *</label>
             <input
-                name="profession"
-                required
-                placeholder="Your current profession"
-                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+              name="profession"
+              required
+              placeholder="Your current profession"
+              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
             />
           </div>
         </section>
@@ -146,29 +149,36 @@ export default function ApplyPage() {
         <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
           <h2 className="text-xl font-semibold">Photo Submission</h2>
           <p className="mt-2 text-sm text-mb-cream/70">
-            Please upload a full-body photo and a front face photo.
+            Please share links (not uploads). We recommend Google Drive, Dropbox, iCloud, or OneDrive.
           </p>
+
+          <div className="mt-4 rounded-2xl border border-mb-gold/15 bg-black/10 p-4">
+            <p className="text-xs text-mb-cream/65">
+              Tip: If using Google Drive, set access to{" "}
+              <span className="text-mb-cream/85">“Anyone with the link can view”</span>.
+            </p>
+          </div>
 
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="text-sm text-mb-cream/70">Full-body photo *</label>
+              <label className="text-sm text-mb-cream/70">Full-body photo link *</label>
               <input
-                  name="fullBodyPhoto"
-                  type="file"
-                  accept="image/*"
-                  required
-                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                name="fullBodyPhotoLink"
+                type="url"
+                required
+                placeholder="https://drive.google.com/..."
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
 
             <div>
-              <label className="text-sm text-mb-cream/70">Front face photo *</label>
+              <label className="text-sm text-mb-cream/70">Front face photo link *</label>
               <input
-                  name="facePhoto"
-                  type="file"
-                  accept="image/*"
-                  required
-                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                name="facePhotoLink"
+                type="url"
+                required
+                placeholder="https://drive.google.com/..."
+                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
             </div>
           </div>
@@ -177,21 +187,24 @@ export default function ApplyPage() {
         <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
           <h2 className="text-xl font-semibold">Video Submission</h2>
           <p className="mt-2 text-sm text-mb-cream/70">
-            Please upload a short video answering: “Why do you want to become the next Miss Bitcoin?”
+            Please share a link to a short video answering: “Why do you want to become the next Miss Bitcoin?”
           </p>
 
-          <div className="mt-5">
-            <label className="text-sm text-mb-cream/70">Intro video *</label>
-            <input
-                name="introVideo"
-                type="file"
-                accept="video/*"
-                required
-                className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
-            />
-            <p className="mt-2 text-xs text-mb-cream/60">
-              If your video fails to upload due to size, please contact us with a Drive or YouTube link.
+          <div className="mt-4 rounded-2xl border border-mb-gold/15 bg-black/10 p-4">
+            <p className="text-xs text-mb-cream/65">
+              You can use YouTube (unlisted), Google Drive, Dropbox, Loom, or any platform where we can view the video.
             </p>
+          </div>
+
+          <div className="mt-5">
+            <label className="text-sm text-mb-cream/70">Intro video link *</label>
+            <input
+              name="introVideoLink"
+              type="url"
+              required
+              placeholder="https://youtube.com/... or https://drive.google.com/..."
+              className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+            />
           </div>
         </section>
 
@@ -215,42 +228,42 @@ export default function ApplyPage() {
           ].map((label, idx) => {
             const n = idx + 1;
             return (
-                <div className="mt-5" key={n}>
-                  <label className="text-sm text-mb-cream/70">
-                    {n}. {label} *
-                  </label>
-                  <textarea
-                      name={`q${n}`}
-                      rows={4}
-                      required
-                      className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
-                  />
-                </div>
+              <div className="mt-5" key={n}>
+                <label className="text-sm text-mb-cream/70">
+                  {n}. {label} *
+                </label>
+                <textarea
+                  name={`q${n}`}
+                  rows={4}
+                  required
+                  className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
+                />
+              </div>
             );
           })}
         </section>
 
         <button
-            type="submit"
-            disabled={status.state === "loading"}
-            className="rounded-full bg-mb-cream px-6 py-3 text-sm font-medium text-mb-dark hover:bg-mb-cream/95 disabled:opacity-60"
+          type="submit"
+          disabled={status.state === "loading"}
+          className="rounded-full bg-mb-cream px-6 py-3 text-sm font-medium text-mb-dark hover:bg-mb-cream/95 disabled:opacity-60"
         >
-          {status.state === "loading" ? "Uploading files (may take a minute)..." : "Submit application"}
+          {status.state === "loading" ? "Submitting..." : "Submit application"}
         </button>
 
         {status.state !== "idle" && (
-            <p
-                className={
-                    "text-sm " +
-                    (status.state === "success"
-                        ? "text-mb-cream/80"
-                        : status.state === "error"
-                            ? "text-red-300"
-                            : "text-mb-cream/70")
-                }
-            >
-              {status.message}
-            </p>
+          <p
+            className={
+              "text-sm " +
+              (status.state === "success"
+                ? "text-mb-cream/80"
+                : status.state === "error"
+                ? "text-red-300"
+                : "text-mb-cream/70")
+            }
+          >
+            {status.message}
+          </p>
         )}
       </form>
     </main>
