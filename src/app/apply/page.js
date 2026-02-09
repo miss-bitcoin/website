@@ -5,7 +5,6 @@ import { useState } from "react";
 function normalizeUrl(raw) {
   const s = String(raw || "").trim();
   if (!s) return "";
-  // If user pastes drive/youtube without protocol, make it clickable
   if (/^https?:\/\//i.test(s)) return s;
   return `https://${s}`;
 }
@@ -21,7 +20,6 @@ export default function ApplyPage() {
 
     const form = new FormData(formEl);
 
-    // Normalize URLs so users don't have to type https://
     for (const key of ["fullBodyPhotoLink", "facePhotoLink", "introVideoLink"]) {
       const v = form.get(key);
       form.set(key, normalizeUrl(v));
@@ -52,6 +50,35 @@ export default function ApplyPage() {
       <p className="mt-4 text-mb-cream/75">
         There are no right or wrong answers — we value honesty, vision, and impact.
       </p>
+
+      <div className="mt-6 rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
+        <h2 className="text-lg font-semibold">How we evaluate applications</h2>
+        <p className="mt-2 text-sm text-mb-cream/70">
+          Miss Bitcoin includes appearance and presentation, but it’s not a traditional beauty pageant.
+          We prioritize leadership, communication, and your ability to create real-world impact.
+        </p>
+
+        {/* Eligibility note */}
+        <p className="mt-3 text-xs text-mb-cream/60">
+          Eligibility: women ages <span className="text-mb-cream/80 font-medium">18–45</span>.
+        </p>
+
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          {[
+            { title: "Bitcoin", desc: "Curiosity and a genuine desire to learn and educate others." },
+            { title: "Impact", desc: "A practical plan to create a community project that helps people." },
+            {
+              title: "Appearance",
+              desc: "Confidence, professionalism, and the ability to represent your country publicly.",
+            },
+          ].map((x) => (
+            <div key={x.title} className="rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-4">
+              <div className="text-sm font-semibold text-mb-cream">{x.title}</div>
+              <p className="mt-2 text-xs text-mb-cream/65">{x.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <form onSubmit={onSubmit} className="mt-10 space-y-8">
         {/* Honeypot */}
@@ -96,12 +123,14 @@ export default function ApplyPage() {
               <input
                 name="age"
                 type="number"
-                min="1"
+                min="18"
+                max="45"
                 step="1"
                 required
                 placeholder="Age"
                 className="mt-2 w-full rounded-xl border border-mb-cream/10 bg-mb-dark/60 px-4 py-3 text-mb-cream outline-none focus:border-mb-gold/60"
               />
+              <p className="mt-2 text-xs text-mb-cream/55">Applicants must be between 18 and 45.</p>
             </div>
           </div>
 
@@ -165,7 +194,8 @@ export default function ApplyPage() {
           </p>
 
           <div className="mt-4 rounded-2xl border border-mb-cream/10 bg-mb-dark/50 p-4 text-xs text-mb-cream/60">
-            Tip: If using Google Drive, set access to <span className="text-mb-cream/80">“Anyone with the link can view”</span>.
+            Tip: If using Google Drive, set access to{" "}
+            <span className="text-mb-cream/80">“Anyone with the link can view”</span>.
           </div>
 
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -213,6 +243,7 @@ export default function ApplyPage() {
           </div>
         </section>
 
+        {/* Questionnaire */}
         <section className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
           <h2 className="text-xl font-semibold">Bitcoin Questionnaire</h2>
           <p className="mt-1 text-sm text-mb-cream/60">

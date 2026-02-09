@@ -44,6 +44,10 @@ export default function HomePage() {
               Not a Bitcoin expert? That’s okay — curiosity and leadership matter more. We teach you
               what you need to know.
             </p>
+
+            <p className="mt-2 text-xs text-mb-cream/55">
+              Eligibility: women ages <span className="text-mb-cream/80 font-medium">18–45</span>.
+            </p>
           </div>
         </div>
       </section>
@@ -71,18 +75,50 @@ export default function HomePage() {
                 <li className="flex gap-3">
                   <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
                   <span>
-                    Built around a{" "}
-                    <span className="text-mb-cream">community project</span> you design and execute.
+                    Built around a <span className="text-mb-cream">community project</span> you design and execute.
                   </span>
                 </li>
                 <li className="flex gap-3">
                   <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
-                  <span>
-                    A global platform to amplify women’s voices in Bitcoin and decentralization.
-                  </span>
+                  <span>A global platform to amplify women’s voices in Bitcoin and decentralization.</span>
                 </li>
               </ul>
+            {/* What we look for */}
+            <div className="mt-8 rounded-2xl border border-mb-gold/15 bg-mb-dark/50 p-6">
+              <h3 className="text-lg font-semibold">What we look for</h3>
+              <p className="mt-2 text-sm text-mb-cream/70">
+                A modern representative at the intersection of presence, Bitcoin curiosity, and real-world impact.
+              </p>
 
+              <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                {[
+                  {
+                    title: "Bitcoin",
+                    desc: "Curiosity and alignment with the mission — you don’t need to be technical to start.",
+                  },
+                  {
+                    title: "Impact",
+                    desc: "Leadership and execution — building a project that helps your community.",
+                  },
+                  {
+                    title: "Appearance",
+                    desc: "Confidence, professionalism, and taking care of yourself — because you’ll represent your country publicly.",
+                  },
+                ].map((x) => (
+                  <div
+                    key={x.title}
+                    className="rounded-2xl border border-mb-cream/10 bg-mb-dark/60 p-4"
+                  >
+                    <div className="text-sm font-semibold text-mb-cream">{x.title}</div>
+                    <p className="mt-2 text-xs text-mb-cream/65">{x.desc}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="mt-4 text-xs text-mb-cream/55">
+                Beauty and physical appearance are a component — but not the primary one. We prioritize purpose, voice, and impact.
+              </p>
+            </div>
               <div className="mt-8">
                 <Link
                   href="/about"
@@ -95,33 +131,57 @@ export default function HomePage() {
 
             {/* Quick cards */}
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
-                <h3 className="text-lg font-semibold">Applicants</h3>
+              <Link
+                href="/apply"
+                className="group rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6 transition hover:border-mb-gold/40 hover:bg-mb-dark/70 focus:outline-none focus:ring-2 focus:ring-mb-gold/40"
+              >
+                <h3 className="text-lg font-semibold group-hover:text-mb-cream">Applicants</h3>
                 <p className="mt-2 text-sm text-mb-cream/70">
                   Women ready to represent their country, learn fast, and lead a meaningful project.
                 </p>
-              </div>
+                <p className="mt-4 text-xs text-mb-cream/60 underline decoration-mb-gold/40 underline-offset-4">
+                  Apply now →
+                </p>
+              </Link>
 
-              <div className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
-                <h3 className="text-lg font-semibold">Sponsors / Partners</h3>
+              <Link
+                href="/contact"
+                className="group rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6 transition hover:border-mb-gold/40 hover:bg-mb-dark/70 focus:outline-none focus:ring-2 focus:ring-mb-gold/40"
+              >
+                <h3 className="text-lg font-semibold group-hover:text-mb-cream">Sponsors / Partners</h3>
                 <p className="mt-2 text-sm text-mb-cream/70">
                   Organizations aligned with education, empowerment, and responsible adoption.
                 </p>
-              </div>
+                <p className="mt-4 text-xs text-mb-cream/60 underline decoration-mb-gold/40 underline-offset-4">
+                  Get in touch →
+                </p>
+              </Link>
 
-              <div className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
-                <h3 className="text-lg font-semibold">Press</h3>
+              <Link
+                href="/contact"
+                className="group rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6 transition hover:border-mb-gold/40 hover:bg-mb-dark/70 focus:outline-none focus:ring-2 focus:ring-mb-gold/40"
+              >
+                <h3 className="text-lg font-semibold group-hover:text-mb-cream">Press</h3>
                 <p className="mt-2 text-sm text-mb-cream/70">
                   Stories at the intersection of women’s leadership, freedom, and Bitcoin.
                 </p>
-              </div>
+                <p className="mt-4 text-xs text-mb-cream/60 underline decoration-mb-gold/40 underline-offset-4">
+                  Contact us →
+                </p>
+              </Link>
 
-              <div className="rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6">
-                <h3 className="text-lg font-semibold">Community</h3>
+              <Link
+                href="/contact"
+                className="group rounded-2xl border border-mb-gold/15 bg-mb-dark/60 p-6 transition hover:border-mb-gold/40 hover:bg-mb-dark/70 focus:outline-none focus:ring-2 focus:ring-mb-gold/40"
+              >
+                <h3 className="text-lg font-semibold group-hover:text-mb-cream">Community</h3>
                 <p className="mt-2 text-sm text-mb-cream/70">
                   Builders and supporters helping deliver education and impact worldwide.
                 </p>
-              </div>
+                <p className="mt-4 text-xs text-mb-cream/60 underline decoration-mb-gold/40 underline-offset-4">
+                  Join the community →
+                </p>
+              </Link>
             </div>
           </div>
         </div>
@@ -136,34 +196,40 @@ export default function HomePage() {
 
               <ul className="mt-6 space-y-3 text-mb-cream/75">
                 <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
-                  <span>
-                    National/International recognition
-                  </span>
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
+                  <span>National / international recognition</span>
                 </li>
+
                 <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
-                  <span>
-                    Education + mentorship in Bitcoin, storytelling, and community-building
-                  </span>
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
+                  <span>Education + mentorship in Bitcoin, storytelling, and community-building</span>
                 </li>
+
                 <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
-                  <span>
-                    Global visibility through the Miss Bitcoin platform and partner events
-                  </span>
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
+                  <span>Global visibility through the Miss Bitcoin platform and partner events</span>
                 </li>
+
                 <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
+                  <span>Support to design and execute a real Bitcoin-based community project</span>
+                </li>
+
+                <li className="flex gap-3">
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
                   <span>
-                    Support to design and execute a real Bitcoin-based community project
+                    <span className="text-mb-cream">Up to 1 BTC in project funding</span>{" "}
+                    awarded to the highest-impact initiative
+                    <span className="block mt-1 text-xs text-mb-cream/60">
+                      The funding is directed to the winning project’s execution and growth — not a personal cash gift.
+                    </span>
                   </span>
                 </li>
               </ul>
 
               <p className="mt-6 text-sm text-mb-cream/60">
-                Exact support details evolve by country and sponsor partners, but the mission stays
-                constant: education + empowerment + impact.
+                Exact support details evolve by country and sponsor partners, but the mission stays constant:
+                education + empowerment + impact.
               </p>
             </div>
 
@@ -171,27 +237,27 @@ export default function HomePage() {
               <h2 className="text-2xl font-semibold">What will you actually do?</h2>
 
               <p className="mt-4 text-mb-cream/75">
-                You’ll propose a simple idea, then build it with guidance — something that can
-                meaningfully help people understand Bitcoin and financial freedom locally.
+                As a Miss Bitcoin representative, you’ll propose a simple, meaningful idea to help people in your
+                country better understand Bitcoin and financial freedom — then bring it to life with guidance
+                and support.
               </p>
 
-              <div className="mt-6 space-y-3 text-mb-cream/75">
-                <div className="rounded-xl border border-mb-cream/10 bg-mb-dark/50 p-4">
-                  <p className="text-sm font-semibold text-mb-cream">Examples of projects</p>
-                  <p className="mt-1 text-sm text-mb-cream/70">
-                    Workshops • school sessions • women’s learning circles • small business education
-                    • community meetups • beginner resources in your language
-                  </p>
-                </div>
+              <p className="mt-4 text-mb-cream/75">
+                <span className="text-mb-cream">You do not need to be a Bitcoin expert.</span> Many participants
+                start with little or no technical background. What matters most is your curiosity, leadership,
+                and ability to communicate and connect with people.
+              </p>
 
-                <div className="rounded-xl border border-mb-cream/10 bg-mb-dark/50 p-4">
-                  <p className="text-sm font-semibold text-mb-cream">You don’t need to be technical</p>
-                  <p className="mt-1 text-sm text-mb-cream/70">
-                    We care about your voice, values, and leadership. We teach Bitcoin basics and
-                    help you shape your story.
-                  </p>
-                </div>
-              </div>
+              <p className="mt-4 text-mb-cream/75">
+                Projects can take many forms: educational workshops, school sessions, women’s learning circles,
+                small business education, community meetups, or beginner-friendly resources in your local
+                language. You’ll receive mentorship to help shape your idea, learn the fundamentals of Bitcoin,
+                and execute your project effectively.
+              </p>
+
+              <p className="mt-4 text-sm text-mb-cream/60">
+                The focus is impact — creating something real, accessible, and useful for your community.
+              </p>
             </div>
           </div>
         </div>
@@ -210,15 +276,15 @@ export default function HomePage() {
 
               <ul className="mt-6 space-y-3 text-mb-cream/75">
                 <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
                   <span>Women who are curious, ambitious, and ready to learn</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
                   <span>Women who can communicate and inspire people around them</span>
                 </li>
                 <li className="flex gap-3">
-                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70" />
+                  <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-mb-gold/70"/>
                   <span>Women who want to build a real project with measurable impact</span>
                 </li>
               </ul>
